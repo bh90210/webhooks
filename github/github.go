@@ -75,6 +75,7 @@ const (
 	WorkflowRunEvent                         Event = "workflow_run"
 	GitHubAppAuthorizationEvent              Event = "github_app_authorization"
 	CodeScanningAlertEvent                   Event = "code_scanning_alert"
+	RegistryPackageEvent                     Event = "registry_package"
 )
 
 // EventSubtype defines a GitHub Hook Event subtype
@@ -356,6 +357,10 @@ func (hook Webhook) Parse(r *http.Request, events ...Event) (interface{}, error)
 		return pl, err
 	case CodeScanningAlertEvent:
 		var pl CodeScanningAlertPayload
+		err = json.Unmarshal([]byte(payload), &pl)
+		return pl, err
+	case RegistryPackageEvent:
+		var pl RegistryPackagePayload
 		err = json.Unmarshal([]byte(payload), &pl)
 		return pl, err
 	default:

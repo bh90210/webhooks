@@ -7382,3 +7382,82 @@ type CodeScanningAlertPayload struct {
 		SiteAdmin         bool   `json:"site_admin"`
 	} `json:"sender"`
 }
+
+type RegistryPackagePayload struct {
+	Action  string `json:"action"`
+	Package struct {
+		ID          int64  `json:"id"`
+		Name        string `json:"name"`
+		PackageType string `json:"package_type"` // npm, maven, container, nuget, rubygems
+		HTMLURL     string `json:"html_url"`
+		CreatedAt   string `json:"created_at"` // ISO-8601 timestamp
+		UpdatedAt   string `json:"updated_at"` // ISO-8601 timestamp
+		Owner       struct {
+			Login             string `json:"login"`
+			Id                int    `json:"id"`
+			NodeId            string `json:"node_id"`
+			AvatarUrl         string `json:"avatar_url"`
+			GravatarId        string `json:"gravatar_id"`
+			Url               string `json:"url"`
+			HtmlUrl           string `json:"html_url"`
+			FollowersUrl      string `json:"followers_url"`
+			FollowingUrl      string `json:"following_url"`
+			GistsUrl          string `json:"gists_url"`
+			StarredUrl        string `json:"starred_url"`
+			SubscriptionsUrl  string `json:"subscriptions_url"`
+			OrganizationsUrl  string `json:"organizations_url"`
+			ReposUrl          string `json:"repos_url"`
+			EventsUrl         string `json:"events_url"`
+			ReceivedEventsUrl string `json:"received_events_url"`
+			Type              string `json:"type"`
+			SiteAdmin         bool   `json:"site_admin"`
+		} `json:"owner"`
+		PackageVersion struct {
+			ID          int64  `json:"id"`
+			Name        string `json:"name"` // Version or digest
+			Description string `json:"description"`
+			Summary     string `json:"summary"`
+			Body        string `json:"body"`
+			HTMLURL     string `json:"html_url"`
+			CreatedAt   string `json:"created_at"` // ISO-8601 timestamp
+			UpdatedAt   string `json:"updated_at"` // ISO-8601 timestamp
+			Metadata    struct {
+				PackageType string `json:"package_type"` // npm, container, etc.
+			} `json:"metadata"`
+		} `json:"package_version,omitempty"` // Nil on delete
+	} `json:"package"`
+	Organization struct {
+		Login            string `json:"login"`
+		Id               int    `json:"id"`
+		NodeId           string `json:"node_id"`
+		Url              string `json:"url"`
+		ReposUrl         string `json:"repos_url"`
+		EventsUrl        string `json:"events_url"`
+		HooksUrl         string `json:"hooks_url"`
+		IssuesUrl        string `json:"issues_url"`
+		MembersUrl       string `json:"members_url"`
+		PublicMembersUrl string `json:"public_members_url"`
+		AvatarUrl        string `json:"avatar_url"`
+		Description      string `json:"description"`
+	} `json:"organization,omitempty"` // Present for org-owned packages
+	Sender struct {
+		Login             string `json:"login"`
+		Id                int    `json:"id"`
+		NodeId            string `json:"node_id"`
+		AvatarUrl         string `json:"avatar_url"`
+		GravatarId        string `json:"gravatar_id"`
+		Url               string `json:"url"`
+		HtmlUrl           string `json:"html_url"`
+		FollowersUrl      string `json:"followers_url"`
+		FollowingUrl      string `json:"following_url"`
+		GistsUrl          string `json:"gists_url"`
+		StarredUrl        string `json:"starred_url"`
+		SubscriptionsUrl  string `json:"subscriptions_url"`
+		OrganizationsUrl  string `json:"organizations_url"`
+		ReposUrl          string `json:"repos_url"`
+		EventsUrl         string `json:"events_url"`
+		ReceivedEventsUrl string `json:"received_events_url"`
+		Type              string `json:"type"`
+		SiteAdmin         bool   `json:"site_admin"`
+	} `json:"sender"`
+}
