@@ -306,11 +306,11 @@ func (hook Webhook) Parse(r *http.Request, events ...Event) (interface{}, error)
 		err = json.Unmarshal([]byte(payload), &pl)
 		return pl, err
 	case PushEvent:
-		var pl PushPayload
+		var pl githubgoo.PushEvent
 		err = json.Unmarshal([]byte(payload), &pl)
 		return pl, err
 	case ReleaseEvent:
-		var pl ReleasePayload
+		var pl githubgoo.ReleaseEvent
 		err = json.Unmarshal([]byte(payload), &pl)
 		return pl, err
 	case RepositoryEvent:

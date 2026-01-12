@@ -13,6 +13,7 @@ import (
 	"reflect"
 	"testing"
 
+	githubgoo "github.com/google/go-github/v81/github"
 	"github.com/stretchr/testify/require"
 )
 
@@ -432,7 +433,7 @@ func TestWebhooks(t *testing.T) {
 		{
 			name:     "PushEvent",
 			event:    PushEvent,
-			typ:      PushPayload{},
+			typ:      githubgoo.PushEvent{},
 			filename: "../testdata/github/push.json",
 			headers: http.Header{
 				"X-Github-Event": []string{"push"},
@@ -441,7 +442,7 @@ func TestWebhooks(t *testing.T) {
 		{
 			name:     "ReleaseEvent",
 			event:    ReleaseEvent,
-			typ:      ReleasePayload{},
+			typ:      githubgoo.ReleaseEvent{},
 			filename: "../testdata/github/release.json",
 			headers: http.Header{
 				"X-Github-Event": []string{"release"},
