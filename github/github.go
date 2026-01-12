@@ -10,6 +10,8 @@ import (
 	"io"
 	"net/http"
 	"strings"
+
+	githubgoo "github.com/google/go-github/v81/github"
 )
 
 // parse errors
@@ -360,7 +362,7 @@ func (hook Webhook) Parse(r *http.Request, events ...Event) (interface{}, error)
 		err = json.Unmarshal([]byte(payload), &pl)
 		return pl, err
 	case RegistryPackageEvent:
-		var pl RegistryPackagePayload
+		var pl githubgoo.RegistryPackageEvent
 		err = json.Unmarshal([]byte(payload), &pl)
 		return pl, err
 	default:
